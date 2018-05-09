@@ -1,5 +1,7 @@
 class DestinationsController < ApplicationController
+  TOKEN = "secret"
 
+  before_action :authenticate, except: [ :index ]
   def index
     country = params[:country]
     @destination = Destination.search(country)
@@ -38,4 +40,11 @@ class DestinationsController < ApplicationController
   def destination_params
     params.permit(:country, :city, :region)
   end
+
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      ActiveSupport::SecurityUtils.secure_compare(token, TOKEN)
+    end
+  end
+
 end

@@ -14,8 +14,8 @@ class Seed
   end
 
   def generate_destinations
-    Destination.destroy_all
-    Review.destroy_all
+    # Destination.destroy_all
+    # Review.destroy_all
 
     20.times do |i|
       Destination.create!(
